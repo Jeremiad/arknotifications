@@ -35,7 +35,6 @@ namespace ArkNotifications.Controllers
 
         // POST api/values
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public void Post(string key, string steamid, string notetitle, string message)
         {
             DbConnection db = new DbConnection();
