@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Serilog;
 
 namespace ArkNotifications
 {
@@ -7,6 +8,12 @@ namespace ArkNotifications
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

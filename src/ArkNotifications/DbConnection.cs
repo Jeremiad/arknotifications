@@ -1,6 +1,8 @@
 ﻿using ArkNotifications.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Serilog;
+using System;
 using System.IO;
 
 namespace ArkNotifications
@@ -17,9 +19,18 @@ namespace ArkNotifications
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
 
-            Configuration = builder.Build();
+            try
+            {
+                Configuration = builder.Build();
 
-            optionsBuilder.UseSqlServer(Configuration["Database:MSSQL:ConnectionString"]);
+                optionsBuilder.UseSqlServer(Configuration["Database:MSSQL:ConnectionString"]);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Config file missing!");
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5));
+                Environment.Exit(1);
+            }
         }
     }
 }

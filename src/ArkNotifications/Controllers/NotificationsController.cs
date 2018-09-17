@@ -33,7 +33,9 @@ namespace ArkNotifications.Controllers
             return result;
         }
 
+
         // POST api/values
+#pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost]
         public void Post(string key, string steamid, string notetitle, string message)
         {
@@ -54,5 +56,6 @@ namespace ArkNotifications.Controllers
                 }
             }
         }
+#pragma warning restore SG0016 // Controller method is vulnerable to CSRF
     }
 }
