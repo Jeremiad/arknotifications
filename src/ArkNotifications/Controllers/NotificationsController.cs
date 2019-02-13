@@ -9,7 +9,7 @@ namespace ArkNotifications.Controllers
     [Route("api/[controller]")]
     public class NotificationsController : Controller
     {
-        // GET: api/values
+        // GET: api/notifications
         [HttpGet]
         public IEnumerable<NotificationModel> Get()
         {
@@ -21,7 +21,7 @@ namespace ArkNotifications.Controllers
             return result;
         }
 
-        // GET api/values/5
+        // GET api/notifications/5
         [HttpGet("{id}")]
         public IEnumerable<NotificationModel> Get(Guid id)
         {
@@ -34,7 +34,7 @@ namespace ArkNotifications.Controllers
         }
 
 
-        // POST api/values
+        // POST api/notifications
 #pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost]
         public void Post(string key, string steamid, string notetitle, string message)

@@ -28,7 +28,7 @@ namespace ArkNotifications
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Config file missing!");
-                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(5));
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(15));
                 Environment.Exit(1);
             }
         }
