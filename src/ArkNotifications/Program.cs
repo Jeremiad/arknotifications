@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
 using Serilog;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ArkNotifications
 {
@@ -14,7 +15,23 @@ namespace ArkNotifications
                 .WriteTo.Console()
                 .CreateLogger();
 
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+
+                try
+                {
+                    var dbContext = services.GetRequiredService<DbConnection>();
+                    dbContext.Database.EnsureCreated();
+                }
+                catch (System.Exception ex)
+                {
+                    Log.Fatal(ex.Message);
+                }
+            }
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

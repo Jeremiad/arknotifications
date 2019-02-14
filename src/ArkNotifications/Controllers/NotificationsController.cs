@@ -9,12 +9,16 @@ namespace ArkNotifications.Controllers
     [Route("api/[controller]")]
     public class NotificationsController : Controller
     {
+        private readonly DbConnection db;
+        public NotificationsController(DbConnection context)
+        {
+            db = context;
+        }
+
         // GET: api/notifications
         [HttpGet]
         public IEnumerable<NotificationModel> Get()
         {
-            DbConnection db = new DbConnection();
-
             var result = (from r in db.Notifications
                           orderby r.Received descending
                           select r).Take(50);
@@ -25,22 +29,17 @@ namespace ArkNotifications.Controllers
         [HttpGet("{id}")]
         public IEnumerable<NotificationModel> Get(Guid id)
         {
-            DbConnection db = new DbConnection();
-
             var result = from r in db.Notifications
                          where r.Id == id
                          select r;
             return result;
         }
 
-
         // POST api/notifications
 #pragma warning disable SG0016 // Controller method is vulnerable to CSRF
         [HttpPost]
         public void Post(string key, string steamid, string notetitle, string message)
         {
-            DbConnection db = new DbConnection();
-
             if (key != null)
             {
                 var record = (from r in db.ApiKeys
