@@ -2,7 +2,7 @@
 Save [Web notifications](https://ark.gamepedia.com/Web_Notifications) from Ark server to MS SQL Database and/or send them to Discord channel
 
 ## Requirements
-* [.Net Core 2.0.x](https://www.microsoft.com/net/download/windows)
+* [.Net Core 2.2.x](https://www.microsoft.com/net/download/windows)
 * Microsoft SQL Server
 
 ### Optional
@@ -23,5 +23,5 @@ dotnet publish -c Release src/ArkNotifications
 
 ## Running
 ```
-dotnet .\src\ArkNotifications\bin\Release\netcoreapp2.0\ArkNotifications.dll
+dotnet .\src\ArkNotifications\bin\Release\netcoreapp2.2\ArkNotifications.dll
 ```
