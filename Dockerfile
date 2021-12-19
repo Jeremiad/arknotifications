@@ -2,6 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 
 # set up network
 ENV ASPNETCORE_URLS http://+:8080
+EXPOSE 8080
 
 RUN mkdir /app
 COPY src/ArkNotifications/bin/Release/net6.0/publish/ /app
