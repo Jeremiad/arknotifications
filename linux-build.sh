@@ -1,7 +1,7 @@
 #!/bin/bash
 git pull
 name=arknotifications_$(date +%Y%m%d)-$(git rev-parse --verify --short HEAD)
-dotnet restore src/ArkNotifications && dotnet publish -c Release -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained=true src/ArkNotifications
+#dotnet restore src/ArkNotifications && dotnet publish -c Release -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained=true src/ArkNotifications
 
-docker build -t $name .
+docker build -t $name -f src/ArkNotifications/Dockerfile .
 docker run -h ark1 -dt $name
